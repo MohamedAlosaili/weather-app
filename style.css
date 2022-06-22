@@ -171,6 +171,8 @@ input:focus {
   border: 0.5rem solid;
   border-color: #fff #666 #666 #666;
   border-radius: 50%;
+  -webkit-animation: loading 0.8s infinite linear;
+  -moz-animation: loading 0.8s infinite linear;
   animation: loading 0.8s infinite linear;
 }
 @keyframes loading {
