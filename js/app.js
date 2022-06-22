@@ -19,9 +19,11 @@ const moreInfo = document.querySelector("[data-more-info]");
 if (localStorage.getItem("location")) {
   starter.remove();
   loader.remove();
+  document.body.append(loader);
+  loader.style.display = "block";
   location = localStorage.getItem("location");
-  getCurrentWeather(location);
-  getForecastingWeather(location);
+  // getCurrentWeather(location);
+  // getForecastingWeather(location);
 }
 searchs.forEach((search) => {
   search.addEventListener("focus", () =>
@@ -59,8 +61,8 @@ function searchFunction(e, search) {
     document.body.append(loader);
 
     localStorage.setItem("location", location);
-    getCurrentWeather(location);
-    getForecastingWeather(location);
+    // getCurrentWeather(location);
+    // getForecastingWeather(location);
 
     search.value = "";
     search.blur();
