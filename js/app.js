@@ -23,8 +23,8 @@ if (localStorage.getItem("location")) {
   starter.remove();
   removeLoader();
   location = localStorage.getItem("location");
-  // getCurrentWeather(location);
-  // getForecastingWeather(location);
+  getCurrentWeather(location);
+  getForecastingWeather(location);
 }
 
 searchs.forEach((search) => {
@@ -60,8 +60,8 @@ function searchFunction(e, search) {
     callLoader();
 
     localStorage.setItem("location", location);
-    // getCurrentWeather(location);
-    // getForecastingWeather(location);
+    getCurrentWeather(location);
+    getForecastingWeather(location);
 
     search.value = "";
     search.blur();
