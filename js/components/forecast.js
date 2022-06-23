@@ -15,9 +15,9 @@ import { starter, loader } from "../app.js";
 export async function getForecastingWeather(location) {
   try {
     const res = await fetch(API_URL + "forecast", options(location));
-    const data = await res.json();
+    const forcastData = await res.json();
 
-    if (data.location) fillForecastSection(data);
+    if (forcastData.location) fillForecastSection(forcastData);
   } catch (err) {
     console.error(err);
   }
@@ -61,40 +61,41 @@ const days = [
   "Saturday",
 ];
 
-function fillForecastSection(data) {
+function fillForecastSection(forcastData) {
   if (starter) {
     loader.remove();
     starter.remove();
   }
-  currentWeatherData(data);
-  const date = new Date(data.forecast[0].date);
+  currentWeatherData(forcastData);
+  const date = new Date(data.forecast[0].date.replace(/\s/, "T"));
 
   generalDate.innerHTML = `${months[date.getMonth()]} ${date.getFullYear()}`;
   detailedDate.innerHTML = `${days[date.getDay()]}, ${
     monthsShort[date.getMonth()]
   } ${date.getDate()}, ${date.getFullYear()}`;
 
-  fillForecastBoxes(data, date);
+  fillForecastBoxes(forcastData, date);
 }
 
-function currentWeatherData(data) {
-  rainBar.style.width = `${data.forecast[0].chance_of_rain}%`;
-  rainPrecentage.innerHTML = `${data.forecast[0].chance_of_rain}%`;
-  sunrise.innerHTML = data.forecast[0].sunrise;
-  sunset.innerHTML = data.forecast[0].sunset;
+function currentWeatherData(forcastData) {
+  rainBar.style.width = `${forcastData.forecast[0].chance_of_rain}%`;
+  rainPrecentage.innerHTML = `${forcastData.forecast[0].chance_of_rain}%`;
+  sunrise.innerHTML = forcastData.forecast[0].sunrise;
+  sunset.innerHTML = forcastData.forecast[0].sunset;
 }
 
-function fillForecastBoxes(data, date) {
+function fillForecastBoxes(forcastData, date) {
   forecastContainer.innerHTML = "";
 
-  data.forecast.forEach((day) => {
+  forcastData.forecast.forEach((day) => {
     forecastContainer.append(templateBox.content.cloneNode(true));
   });
 
   const dayBoxes = document.querySelectorAll(".day-box");
 
   dayBoxes.forEach((day, idx) => {
-    day.querySelector("[data-box-img]").src = data.forecast[idx].icon_url;
+    day.querySelector("[data-box-img]").src =
+      forcastData.forecast[idx].icon_url;
 
     if (idx <= 1) {
       if (idx === 0) day.querySelector(".day").innerHTML = "Today";
@@ -108,7 +109,7 @@ function fillForecastBoxes(data, date) {
       date.getDate() + idx
     }`;
     day.querySelector(".max-min-dgree").innerHTML = `${Math.round(
-      data.forecast[idx].min_temp_c
-    )}°/${Math.round(data.forecast[idx].max_temp_c)}°`;
+      forcastData.forecast[idx].min_temp_c
+    )}°/${Math.round(forcastData.forecast[idx].max_temp_c)}°`;
   });
 }

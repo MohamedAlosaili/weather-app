@@ -6,12 +6,14 @@ let hours;
 let period;
 export let interval;
 
-export function setUpTime(date) {
-  const time = new Date(date.replace(" ", "T"));
-
-  seconds = time.getSeconds();
-  minutes = time.getMinutes();
-  hours = time.getHours();
+export function setUpTime(localTime) {
+  const newDate = localTime.replace(/\s/, "T");
+  console.log(typeof "2022-10-15T10:30" == typeof newDate);
+  const dateAndTime = new Date("2022-10-15T10:30");
+  console.log(dateAndTime);
+  seconds = dateAndTime.getSeconds();
+  minutes = dateAndTime.getMinutes();
+  hours = dateAndTime.getHours();
   period = hours > 12 ? "PM" : "AM";
 
   clearInterval(interval);

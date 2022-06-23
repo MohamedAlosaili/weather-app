@@ -13,26 +13,26 @@ import { setUpTime } from "./clock.js";
 export async function getCurrentWeather(location) {
   try {
     const res = await fetch(API_URL + "now", options(location));
-    const data = await res.json();
-    console.log(data);
-    if (data.location) {
-      fillCurrentWeatherSection(data);
+    const currentData = await res.json();
+    console.log(currentData);
+    if (currentData.location) {
+      fillCurrentWeatherSection(currentData);
       // Call Clock Function
-      setUpTime(data.local_time);
-    } else somethingWrong(data.detail);
+      setUpTime(currentData.local_time);
+    } else somethingWrong(currentData.detail);
   } catch (err) {
     console.error(err);
   }
 }
 
-function fillCurrentWeatherSection(data) {
+function fillCurrentWeatherSection(currentData) {
   if (starter) {
     loader.remove();
     starter.remove();
   }
-  city.innerHTML = data.location;
-  region.innerHTML = data.region;
-  currentWeatherImg.src = `https:${data.icon_url}`;
-  currentCondition.innerHTML = data.condition;
-  currentWeatherDegree.innerHTML = `${Math.round(data.temp_c)}° C`;
+  city.innerHTML = currentData.location;
+  region.innerHTML = currentData.region;
+  currentWeatherImg.src = `https:${currentData.icon_url}`;
+  currentCondition.innerHTML = currentData.condition;
+  currentWeatherDegree.innerHTML = `${Math.round(currentData.temp_c)}° C`;
 }
