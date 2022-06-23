@@ -10,7 +10,7 @@ import {
   sunrise,
   sunset,
 } from "../config.js";
-import { starter, loader } from "../app.js";
+import { starter, removeLoader } from "../app.js";
 
 export async function getForecastingWeather(location) {
   try {
@@ -63,7 +63,7 @@ const days = [
 
 function fillForecastSection(forcastData) {
   if (starter) {
-    loader.remove();
+    removeLoader();
     starter.remove();
   }
   currentWeatherData(forcastData);

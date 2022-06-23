@@ -165,20 +165,17 @@ input:focus {
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%) rotate(0);
+  -moz-transform: translate(-50%, -50%) rotate(0);
+  transform: translate(-50%, -50%) rotate(0);
   width: 5rem;
   height: 5rem;
   border: 0.5rem solid;
   border-color: #fff #666 #666 #666;
   border-radius: 50%;
-  -webkit-animation: loading 0.8s infinite linear;
-  -moz-animation: loading 0.8s infinite linear;
-  -ms-animation: loading 0.8s infinite linear;
-  -o-animation: loading 0.8s infinite linear;
-  animation: loading 0.8s infinite linear;
+  -webkit-transition: 0.6s linear;
+  -moz-transition: 0.6s linear;
+  transition: 0.6s linear;
 }
 @-webkit-keyframes loading {
   100% {

@@ -15,14 +15,18 @@ export let lon = 0;
 const userLocation = document.querySelector("[data-user-location]");
 const moreInfo = document.querySelector("[data-more-info]");
 
+let rotate = 0;
+export let loaderInterval;
+
 // Check LocalStorage
 if (localStorage.getItem("location")) {
   starter.remove();
-  loader.remove();
+  removeLoader();
   location = localStorage.getItem("location");
   // getCurrentWeather(location);
   // getForecastingWeather(location);
 }
+
 searchs.forEach((search) => {
   search.addEventListener("focus", () =>
     search.parentElement.classList.add("active")
@@ -53,10 +57,7 @@ function searchFunction(e, search) {
 
   if (location) {
     previousLocation = localStorage.getItem("location");
-    document.body.append(loader);
-    loader.style.display = "block";
-
-    document.body.append(loader);
+    callLoader();
 
     localStorage.setItem("location", location);
     // getCurrentWeather(location);
@@ -68,7 +69,7 @@ function searchFunction(e, search) {
 }
 
 export function somethingWrong(message) {
-  loader.remove();
+  removeLoader();
   localStorage.setItem("location", previousLocation);
 
   const wrongBox = document.createElement("div");
@@ -90,8 +91,7 @@ export function somethingWrong(message) {
 
 function getGeolocation(e) {
   userLocation.remove();
-  document.body.append(loader);
-  loader.style.display = "block";
+  callLoader();
   e.preventDefault();
 
   navigator.geolocation.getCurrentPosition((position) => {
@@ -100,4 +100,20 @@ function getGeolocation(e) {
 
     getCurrentLocation();
   });
+}
+
+export function callLoader() {
+  document.body.append(loader);
+  loader.style.display = "block";
+  loaderIntervalFunction();
+}
+export function removeLoader() {
+  loader.remove();
+  clearInterval(loaderInterval);
+}
+
+function loaderIntervalFunction() {
+  loaderInterval = setInterval(() => {
+    loader.children[0].style.transform = `translate(-50%, -50%) rotate(${(rotate += 360)}deg)`;
+  }, 600);
 }
