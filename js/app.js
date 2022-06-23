@@ -3,7 +3,6 @@ import { getCurrentWeather } from "./components/current.js";
 import { getForecastingWeather } from "./components/forecast.js";
 import { getCurrentLocation } from "./components/current-location.js";
 
-loader.remove();
 const forms = document.querySelectorAll("[data-form]");
 const searchs = document.querySelectorAll("[type='search']");
 const userLocationBtns = document.querySelectorAll("[data-my-location]");
@@ -14,12 +13,18 @@ let lon = 0;
 const userLocation = document.querySelector("[data-user-location]");
 const moreInfo = document.querySelector("[data-more-info]");
 
+loader.style.display = "block";
+
 // Check LocalStorage
 if (localStorage.getItem("location")) {
   starter.remove();
+  loader.remove();
   location = localStorage.getItem("location");
   getCurrentWeather(location);
   getForecastingWeather(location);
+} else {
+  document.body.append(starter);
+  loader.remove();
 }
 
 searchs.forEach((search) => {
