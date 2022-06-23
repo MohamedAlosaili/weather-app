@@ -7,7 +7,7 @@ import {
   currentCondition,
   currentWeatherDegree,
 } from "../config.js";
-import { starter, removeLoader, somethingWrong } from "../app.js";
+import { starter, loader, somethingWrong } from "../app.js";
 import { setUpTime } from "./clock.js";
 
 export async function getCurrentWeather(location) {
@@ -28,7 +28,7 @@ export async function getCurrentWeather(location) {
 
 function fillCurrentWeatherSection(currentData) {
   if (starter) {
-    removeLoader();
+    loader.remove();
     starter.remove();
   }
   city.innerHTML = currentData.location;
