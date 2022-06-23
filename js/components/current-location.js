@@ -8,11 +8,10 @@ export async function getCurrentLocation() {
   try {
     const res = await fetch(API_URL);
     const locationData = await res.json();
-    console.log(locationData);
 
     extractLocation(locationData.results);
   } catch (err) {
-    console.error(err);
+    somethingWrong(err);
   }
 }
 

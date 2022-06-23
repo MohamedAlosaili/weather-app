@@ -14,7 +14,7 @@ export async function getCurrentWeather(location) {
   try {
     const res = await fetch(API_URL + "now", options(location));
     const currentData = await res.json();
-    console.log(currentData);
+
     if (currentData.location) {
       fillCurrentWeatherSection(currentData);
       // Call Clock Function
@@ -22,7 +22,7 @@ export async function getCurrentWeather(location) {
       setUpTime(currentData.local_time);
     } else somethingWrong(currentData.detail);
   } catch (err) {
-    console.error(err);
+    somethingWrong(err);
   }
 }
 

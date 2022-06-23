@@ -77,7 +77,7 @@ export function somethingWrong(message) {
 
   wrongBox.innerHTML = `
     <div class="box">
-      <h3 class="title">Opps, Sorry we don't find this location.<br>Please try another location</h3>
+      <h3 class="title">Opps, Something went wrong</h3>
       <p class="message">"${message}"</p>
       <button class="btn" data-close-btn>OK</button>
     </div>

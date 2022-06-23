@@ -19,7 +19,7 @@ export async function getForecastingWeather(location) {
 
     if (forcastData.location) fillForecastSection(forcastData);
   } catch (err) {
-    console.error(err);
+    somethingWrong(err);
   }
 }
 
@@ -101,8 +101,8 @@ function fillForecastBoxes(forcastData, date) {
       if (idx === 0) day.querySelector(".day").innerHTML = "Today";
       else day.querySelector(".day").innerHTML = "Tomorrow";
     } else {
-      const dayidx =
-        6 - (6 - date.getDay()) + idx < 7 ? 6 - (6 - date.getDay()) + idx : 0;
+      const calcIdx = idx + date.getDay();
+      const dayidx = calcIdx < 7 ? calcIdx : calcIdx - 7;
       day.querySelector(".day").innerHTML = days[dayidx];
     }
     day.querySelector(".date").innerHTML = `${monthsShort[date.getMonth()]}, ${

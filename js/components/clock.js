@@ -13,8 +13,7 @@ export function setUpTime(localTime) {
   );
   if (isNaN(checkHours)) localTime = localTime.replace(/\s/, "T0");
   else localTime = localTime.replace(/\s/, "T");
-  const dateAndTime = new Date(localTime.replace(/\s/, "T"));
-  console.log(dateAndTime);
+  const dateAndTime = new Date(localTime);
   seconds = dateAndTime.getSeconds();
   minutes = dateAndTime.getMinutes();
   hours = dateAndTime.getHours();
