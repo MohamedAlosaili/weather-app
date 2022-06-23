@@ -165,6 +165,9 @@ input:focus {
   position: absolute;
   top: 50%;
   left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   width: 5rem;
   height: 5rem;
@@ -173,12 +176,31 @@ input:focus {
   border-radius: 50%;
   -webkit-animation: loading 0.8s infinite linear;
   -moz-animation: loading 0.8s infinite linear;
+  -ms-animation: loading 0.8s infinite linear;
+  -o-animation: loading 0.8s infinite linear;
   animation: loading 0.8s infinite linear;
 }
 @-webkit-keyframes loading {
   100% {
     -webkit-transform: translate(-50%, -50%) rotate(1turn);
     -moz-transform: translate(-50%, -50%) rotate(1turn);
+    -ms-transform: translate(-50%, -50%) rotate(1turn);
+    transform: translate(-50%, -50%) rotate(1turn);
+  }
+}
+@-moz-keyframes loading {
+  100% {
+    -webkit-transform: translate(-50%, -50%) rotate(1turn);
+    -moz-transform: translate(-50%, -50%) rotate(1turn);
+    -ms-transform: translate(-50%, -50%) rotate(1turn);
+    transform: translate(-50%, -50%) rotate(1turn);
+  }
+}
+@keyframes loading {
+  100% {
+    -webkit-transform: translate(-50%, -50%) rotate(1turn);
+    -moz-transform: translate(-50%, -50%) rotate(1turn);
+    -ms-transform: translate(-50%, -50%) rotate(1turn);
     transform: translate(-50%, -50%) rotate(1turn);
   }
 }
