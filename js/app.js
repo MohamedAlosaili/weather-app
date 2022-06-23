@@ -14,7 +14,7 @@ export let lat = 0;
 export let lon = 0;
 const userLocation = document.querySelector("[data-user-location]");
 const moreInfo = document.querySelector("[data-more-info]");
-import { setUpTime } from "./clock.js";
+import { setUpTime } from "./components/clock.js";
 setUpTime("2022-06-23 3:44");
 
 // Check LocalStorage
