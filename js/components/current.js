@@ -20,6 +20,8 @@ export async function getCurrentWeather(location) {
     if (currentData.location) {
       fillCurrentWeatherSection(currentData);
       // Call Clock Function
+      if (!localStorage.getItem("location"))
+        localStorage.setItem("location", location);
       setUpTime(currentData.local_time);
     } else somethingWrong(currentData.detail);
   } catch (err) {
@@ -28,9 +30,9 @@ export async function getCurrentWeather(location) {
 }
 
 function fillCurrentWeatherSection(currentData) {
-  if (starter) {
-    loader.remove();
+  if (starter || loader) {
     starter.remove();
+    loader.remove();
   }
   city.innerHTML = currentData.location;
   region.innerHTML = currentData.region;

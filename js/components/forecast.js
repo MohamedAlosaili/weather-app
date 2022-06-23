@@ -63,9 +63,9 @@ const days = [
 ];
 
 function fillForecastSection(forcastData) {
-  if (starter) {
-    loader.remove();
+  if (starter || loader) {
     starter.remove();
+    loader.remove();
   }
   currentWeatherData(forcastData);
   const date = new Date(forcastData.forecast[0].date);

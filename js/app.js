@@ -1,4 +1,4 @@
-import { starter, loader } from "./config.js";
+import { loader, starter } from "./config.js";
 import { getCurrentWeather } from "./components/current.js";
 import { getForecastingWeather } from "./components/forecast.js";
 import { getCurrentLocation } from "./components/current-location.js";
@@ -11,6 +11,7 @@ let previousLocation;
 let lat = 0;
 let lon = 0;
 const userLocation = document.querySelector("[data-user-location]");
+const userLocationParent = userLocation.parentElement;
 const moreInfo = document.querySelector("[data-more-info]");
 
 loader.style.display = "block";
@@ -18,14 +19,12 @@ loader.style.display = "block";
 // Check LocalStorage
 if (localStorage.getItem("location")) {
   starter.remove();
-  loader.remove();
   location = localStorage.getItem("location");
+  if (localStorage.getItem("current-location") === location)
+    userLocation.remove();
   getCurrentWeather(location);
   getForecastingWeather(location);
-} else {
-  document.body.append(starter);
-  loader.remove();
-}
+} else loader.remove();
 
 searchs.forEach((search) => {
   search.addEventListener("focus", () =>
@@ -37,7 +36,10 @@ searchs.forEach((search) => {
 });
 
 forms.forEach((form, idx) => {
-  form.addEventListener("submit", (e) => searchFunction(e, searchs[idx]));
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    searchFunction(searchs[idx]);
+  });
 });
 
 userLocationBtns.forEach((btn) => {
@@ -45,21 +47,22 @@ userLocationBtns.forEach((btn) => {
   btn.addEventListener("mouseenter", (e) => e.target.classList.add("more"));
   btn.addEventListener("mouseleave", (e) => e.target.classList.remove("more"));
 });
+
 moreInfo.addEventListener("click", () =>
   moreInfo.previousElementSibling.classList.toggle("more")
 );
 
-function searchFunction(e, search) {
-  userLocation.parentElement.append(userLocation);
-  e.preventDefault();
+function searchFunction(search) {
+  userLocationParent.append(userLocation);
   location = search.value;
 
   if (location) {
-    previousLocation = localStorage.getItem("location");
     document.body.append(loader);
     loader.style.display = "block";
-
-    localStorage.setItem("location", location);
+    if (localStorage.getItem("location")) {
+      previousLocation = localStorage.getItem("location");
+      localStorage.setItem("location", location);
+    }
     getCurrentWeather(location);
     getForecastingWeather(location);
 
@@ -70,7 +73,8 @@ function searchFunction(e, search) {
 
 export function somethingWrong(message) {
   loader.remove();
-  localStorage.setItem("location", previousLocation);
+  if (localStorage.getItem("location"))
+    localStorage.setItem("location", previousLocation);
 
   const wrongBox = document.createElement("div");
   wrongBox.classList.add("wrong-box", "layer");

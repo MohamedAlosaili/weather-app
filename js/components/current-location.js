@@ -31,6 +31,7 @@ function extractLocation(results) {
   }
   const currentLocation = `${locality} ${postalCode}`;
   localStorage.setItem("location", currentLocation);
+  localStorage.setItem("current-location", localStorage.getItem("location"));
   getCurrentWeather(currentLocation);
   getForecastingWeather(currentLocation);
 }
