@@ -7,9 +7,13 @@ let period;
 export let interval;
 
 export function setUpTime(localTime) {
-  const newDate = localTime.replace(/\s/, "T");
-  console.log(typeof "2022-10-15T10:30" == typeof newDate);
-  const dateAndTime = new Date("2022-10-15T10:30");
+  const checkHours = localTime.slice(
+    localTime.indexOf(" ") + 1,
+    localTime.indexOf(" ") + 3
+  );
+  if (isNaN(checkHours)) localTime = localTime.replace(/\s/, "T0");
+  else localTime = localTime.replace(/\s/, "T");
+  const dateAndTime = new Date(localTime.replace(/\s/, "T"));
   console.log(dateAndTime);
   seconds = dateAndTime.getSeconds();
   minutes = dateAndTime.getMinutes();

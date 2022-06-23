@@ -67,7 +67,7 @@ function fillForecastSection(forcastData) {
     starter.remove();
   }
   currentWeatherData(forcastData);
-  const date = new Date(data.forecast[0].date.replace(/\s/, "T"));
+  const date = new Date(forcastData.forecast[0].date);
 
   generalDate.innerHTML = `${months[date.getMonth()]} ${date.getFullYear()}`;
   detailedDate.innerHTML = `${days[date.getDay()]}, ${
