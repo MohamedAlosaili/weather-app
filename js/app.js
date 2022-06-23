@@ -19,8 +19,6 @@ const moreInfo = document.querySelector("[data-more-info]");
 if (localStorage.getItem("location")) {
   starter.remove();
   loader.remove();
-  document.body.append(loader);
-  loader.style.display = "block";
   location = localStorage.getItem("location");
   // getCurrentWeather(location);
   // getForecastingWeather(location);

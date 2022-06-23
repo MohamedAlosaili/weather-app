@@ -14,11 +14,12 @@ export async function getCurrentWeather(location) {
   try {
     const res = await fetch(API_URL + "now", options(location));
     const data = await res.json();
-
+    console.log(data);
     if (data.location) {
       fillCurrentWeatherSection(data);
       // Call Clock Function
-      setUpTime(data.local_time);
+      // setUpTime(data.local_time);
+      setUpTime("2022-06-23 3:44");
     } else somethingWrong(data.detail);
   } catch (err) {
     console.error(err);
