@@ -10,7 +10,7 @@ import {
   sunrise,
   sunset,
 } from "../config.js";
-import { starter, loader, somethingWrong } from "../app.js";
+import { starter, loader } from "../app.js";
 
 export async function getForecastingWeather(location) {
   try {

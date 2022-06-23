@@ -380,7 +380,7 @@ input:focus {
   position: absolute;
   left: 50%;
   transform: translateX(-50%) rotate(calc(var(--d) * 30deg));
-  transform-origin: 0.1rem calc(7.5rem - 0.28rem);
+  transform-origin: 0.1rem calc(7.5rem - 3px);
   display: block;
   height: var(--h);
   width: 0.15rem;
@@ -429,7 +429,8 @@ input:focus {
   position: absolute;
   top: 4rem;
   left: 2rem;
-  box-shadow: 0 0 20px rgb(0 0 0 / 30%);
+  -webkit-filter: drop-shadow(2px 4px 6px rgba(0 0 0 / 0.3));
+  filter: drop-shadow(2px 4px 6px rgba(0 0 0 / 0.3));
 }
 .current-weather .user-location .btn {
   padding: 0;

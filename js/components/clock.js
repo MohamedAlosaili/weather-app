@@ -30,7 +30,7 @@ export function getTime() {
     }
   }
 
-  period = hours > 12 ? "PM" : "AM";
+  period = hours >= 12 ? "PM" : "AM";
   let editedHours = hours;
 
   if (editedHours === 0) {
@@ -45,9 +45,11 @@ export function getTime() {
     minutes
   )}deg)`;
 
-  if (minutes < 10)
-    digitalClock.innerHTML = `${editedHours}:0${minutes} ${period}`;
-  else digitalClock.innerHTML = `${editedHours}:${minutes} ${period}`;
+  let clock;
+  if (minutes < 10) clock = `${editedHours}:0${minutes} ${period}`;
+  else clock = `${editedHours}:${minutes} ${period}`;
+
+  digitalClock.innerHTML = clock;
 }
 
 const scale = (hours, minute) => {
