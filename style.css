@@ -175,7 +175,7 @@ input:focus {
   -moz-animation: loading 0.8s infinite linear;
   animation: loading 0.8s infinite linear;
 }
-@keyframes loading {
+@-webkit-keyframes loading {
   100% {
     -webkit-transform: translate(-50%, -50%) rotate(1turn);
     -moz-transform: translate(-50%, -50%) rotate(1turn);
