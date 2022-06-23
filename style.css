@@ -48,6 +48,15 @@ a {
 input:focus {
   outline: none;
 }
+/* Transition Elements */
+.form,
+.form .search::placeholder,
+.current-weather .user-location .btn::before,
+.current-weather .user-location .btn::after {
+  -webkit-transition: var(--transition-duration, 0.3s);
+  -moz-transition: var(--transition-duration, 0.3s);
+  transition: var(--transition-duration, 0.3s);
+}
 .layer::before {
   content: "";
   position: absolute;
@@ -72,9 +81,6 @@ input:focus {
   padding: 0.5rem;
   border-radius: var(--large-border-radius, 3rem);
   border: 2px solid rgba(21, 47, 81, 0.3);
-  -webkit-transition: var(--transition-duration, 0.3s);
-  -moz-transition: var(--transition-duration, 0.3s);
-  transition: var(--transition-duration, 0.3s);
 }
 .form.active {
   border-color: var(--dark-blue, #152f51);
@@ -86,11 +92,6 @@ input:focus {
   background-color: transparent;
   padding: var(--small-pad-mar, 1rem);
   border-radius: var(--large-border-radius, 3rem);
-}
-.form .search::placeholder {
-  -webkit-transition: var(--transition-duration, 0.3s);
-  -moz-transition: var(--transition-duration, 0.3s);
-  transition: var(--transition-duration, 0.3s);
 }
 .form .search:focus::placeholder {
   color: transparent;
@@ -178,11 +179,6 @@ input:focus {
   animation: loading 1s linear infinite;
 }
 @-webkit-keyframes loading {
-  0% {
-    -webkit-transform: translate(-50%, -50%) rotate(0deg);
-    -moz-transform: translate(-50%, -50%) rotate(0deg);
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
   100% {
     -webkit-transform: translate(-50%, -50%) rotate(360deg);
     -moz-transform: translate(-50%, -50%) rotate(360deg);
@@ -190,11 +186,6 @@ input:focus {
   }
 }
 @-moz-keyframes loading {
-  0% {
-    -webkit-transform: translate(-50%, -50%) rotate(0deg);
-    -moz-transform: translate(-50%, -50%) rotate(0deg);
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
   100% {
     -webkit-transform: translate(-50%, -50%) rotate(360deg);
     -moz-transform: translate(-50%, -50%) rotate(360deg);
@@ -202,11 +193,6 @@ input:focus {
   }
 }
 @keyframes loading {
-  0% {
-    -webkit-transform: translate(-50%, -50%) rotate(0deg);
-    -moz-transform: translate(-50%, -50%) rotate(0deg);
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
   100% {
     -webkit-transform: translate(-50%, -50%) rotate(360deg);
     -moz-transform: translate(-50%, -50%) rotate(360deg);
@@ -458,9 +444,6 @@ input:focus {
   background-color: var(--light-gray, #eef2f3);
   opacity: 0;
   pointer-events: none;
-  -webkit-transition: var(--transition-duration, 0.3s);
-  -moz-transition: var(--transition-duration, 0.3s);
-  transition: var(--transition-duration, 0.3s);
 }
 .current-weather .user-location .btn.more::before,
 .current-weather .user-location .btn.more::after {

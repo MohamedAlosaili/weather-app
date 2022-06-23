@@ -1,13 +1,15 @@
 import {
   API_URL,
   options,
+  starter,
+  loader,
   city,
   region,
   currentWeatherImg,
   currentCondition,
   currentWeatherDegree,
 } from "../config.js";
-import { starter, loader, somethingWrong } from "../app.js";
+import { somethingWrong } from "../app.js";
 import { setUpTime } from "./clock.js";
 
 export async function getCurrentWeather(location) {
@@ -18,7 +20,6 @@ export async function getCurrentWeather(location) {
     if (currentData.location) {
       fillCurrentWeatherSection(currentData);
       // Call Clock Function
-      // currentData.local_time
       setUpTime(currentData.local_time);
     } else somethingWrong(currentData.detail);
   } catch (err) {

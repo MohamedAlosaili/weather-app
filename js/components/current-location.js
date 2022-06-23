@@ -1,8 +1,7 @@
-import { lat, lon } from "../app.js";
 import { getCurrentWeather } from "../components/current.js";
 import { getForecastingWeather } from "../components/forecast.js";
 
-export async function getCurrentLocation() {
+export async function getCurrentLocation(lat, lon) {
   const API_KEY = "AIzaSyDTttOK0BFkVFCiujplZeh4FW3dAaxa3Bg";
   const API_URL = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${API_KEY}`;
   try {

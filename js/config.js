@@ -1,4 +1,4 @@
-// https://m3o.com => API
+// https://m3o.com
 const API_KEY = "MmJkMDUxNzYtZTNlOC00MGQ5LWIyZjEtZWEzY2NkNjYyNmQz";
 const API_URL = "https://api.m3o.com/v1/weather/";
 const options = (location) => {
@@ -14,7 +14,9 @@ const options = (location) => {
     }),
   };
 };
-export { API_URL, options };
+
+const starter = document.getElementById("starter");
+const loader = document.querySelector("[data-loader]");
 
 // Current Weather Variables
 const city = document.querySelector("[data-city]");
@@ -22,13 +24,6 @@ const region = document.querySelector("[data-region]");
 const currentWeatherImg = document.querySelector("[data-weather-img]");
 const currentCondition = document.querySelector("[data-condition]");
 const currentWeatherDegree = document.querySelector("[data-weather-degree]");
-export {
-  city,
-  region,
-  currentWeatherImg,
-  currentCondition,
-  currentWeatherDegree,
-};
 
 // Forecast Weather Variables
 const generalDate = document.querySelector("[data-general-date]");
@@ -39,7 +34,23 @@ const rainBar = document.querySelector("[data-rain-bar]");
 const rainPrecentage = document.querySelector("[data-rain-precentage]");
 const sunrise = document.querySelector("[data-sunrise]");
 const sunset = document.querySelector("[data-sunset]");
+
+// Clock Variables
+const hourLine = document.getElementById("hour-line");
+const minuteLine = document.getElementById("minute-line");
+const secondLine = document.getElementById("second-line");
+const digitalClock = document.getElementById("digital-clock");
+
 export {
+  API_URL,
+  options,
+  starter,
+  loader,
+  city,
+  region,
+  currentWeatherImg,
+  currentCondition,
+  currentWeatherDegree,
   generalDate,
   detailedDate,
   forecastContainer,
@@ -48,12 +59,8 @@ export {
   rainPrecentage,
   sunrise,
   sunset,
+  hourLine,
+  minuteLine,
+  secondLine,
+  digitalClock,
 };
-
-// Clock Variables
-const hourLine = document.getElementById("hour-line");
-const minuteLine = document.getElementById("minute-line");
-const secondLine = document.getElementById("second-line");
-const digitalClock = document.getElementById("digital-clock");
-
-export { hourLine, minuteLine, secondLine, digitalClock };

@@ -1,6 +1,8 @@
 import {
   API_URL,
   options,
+  starter,
+  loader,
   generalDate,
   detailedDate,
   forecastContainer,
@@ -10,7 +12,6 @@ import {
   sunrise,
   sunset,
 } from "../config.js";
-import { starter, loader } from "../app.js";
 
 export async function getForecastingWeather(location) {
   try {

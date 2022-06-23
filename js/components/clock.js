@@ -4,7 +4,7 @@ let seconds;
 let minutes;
 let hours;
 let period;
-export let interval;
+let interval;
 
 export function setUpTime(localTime) {
   const checkHours = localTime.slice(
@@ -14,7 +14,7 @@ export function setUpTime(localTime) {
   if (isNaN(checkHours)) localTime = localTime.replace(/\s/, "T0");
   else localTime = localTime.replace(/\s/, "T");
   const dateAndTime = new Date(localTime);
-  seconds = dateAndTime.getSeconds();
+  seconds = dateAndTime.getSeconds() + 1;
   minutes = dateAndTime.getMinutes();
   hours = dateAndTime.getHours();
   period = hours > 12 ? "PM" : "AM";
@@ -23,7 +23,7 @@ export function setUpTime(localTime) {
   interval = setInterval(getTime, 1000);
 }
 
-export function getTime() {
+function getTime() {
   seconds++;
   if (seconds === 60) {
     seconds = 0;
@@ -50,11 +50,9 @@ export function getTime() {
     minutes
   )}deg)`;
 
-  let clock;
-  if (minutes < 10) clock = `${editedHours}:0${minutes} ${period}`;
-  else clock = `${editedHours}:${minutes} ${period}`;
-
-  digitalClock.innerHTML = clock;
+  if (minutes < 10)
+    digitalClock.innerHTML = `${editedHours}:0${minutes} ${period}`;
+  else digitalClock.innerHTML = `${editedHours}:${minutes} ${period}`;
 }
 
 const scale = (hours, minute) => {
