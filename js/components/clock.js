@@ -7,7 +7,7 @@ let period;
 export let interval;
 
 export function setUpTime(date) {
-  const time = new Date(date);
+  const time = new Date(date.replace(" ", "T"));
 
   seconds = time.getSeconds();
   minutes = time.getMinutes();
