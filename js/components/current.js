@@ -18,8 +18,7 @@ export async function getCurrentWeather(location) {
     if (data.location) {
       fillCurrentWeatherSection(data);
       // Call Clock Function
-      // setUpTime(data.local_time);
-      setUpTime("2022-06-23 3:44");
+      setUpTime(data.local_time);
     } else somethingWrong(data.detail);
   } catch (err) {
     console.error(err);
