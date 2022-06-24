@@ -1,3 +1,4 @@
+import { somethingWrong, userLocation } from "../app.js";
 import { getCurrentWeather } from "../components/current.js";
 import { getForecastingWeather } from "../components/forecast.js";
 
@@ -29,9 +30,14 @@ function extractLocation(results) {
       }
     }
   }
-  const currentLocation = `${locality} ${postalCode}`;
-  localStorage.setItem("location", currentLocation);
-  localStorage.setItem("current-location", localStorage.getItem("location"));
-  getCurrentWeather(currentLocation);
-  getForecastingWeather(currentLocation);
+  if (locality !== undefined || postalCode !== undefined) {
+    userLocation.remove();
+    const currentLocation = `${locality} ${postalCode}`;
+    localStorage.setItem("location", currentLocation);
+    localStorage.setItem("current-location", localStorage.getItem("location"));
+    getCurrentWeather(currentLocation);
+    getForecastingWeather(currentLocation);
+  } else {
+    somethingWrong("Sorry, We can't get your location now");
+  }
 }

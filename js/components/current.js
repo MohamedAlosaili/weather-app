@@ -19,9 +19,11 @@ export async function getCurrentWeather(location) {
 
     if (currentData.location) {
       fillCurrentWeatherSection(currentData);
-      // Call Clock Function
+
       if (!localStorage.getItem("location"))
         localStorage.setItem("location", location);
+
+      // Call Clock Function
       setUpTime(currentData.local_time);
     } else somethingWrong(currentData.detail);
   } catch (err) {

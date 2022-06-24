@@ -7,16 +7,12 @@ let period;
 let interval;
 
 export function setUpTime(localTime) {
-  const checkHours = localTime.slice(
-    localTime.indexOf(" ") + 1,
-    localTime.indexOf(" ") + 3
-  );
-  if (isNaN(checkHours)) localTime = localTime.replace(/\s/, "T0");
-  else localTime = localTime.replace(/\s/, "T");
-  const dateAndTime = new Date(localTime);
-  seconds = dateAndTime.getSeconds() + 1;
-  minutes = dateAndTime.getMinutes();
-  hours = dateAndTime.getHours();
+  const timeArr = localTime.slice(localTime.indexOf(" ") + 1).split(":");
+  const time = new Date();
+  time.setHours(timeArr[0], timeArr[1]);
+  seconds = time.getSeconds();
+  minutes = time.getMinutes();
+  hours = time.getHours();
   period = hours > 12 ? "PM" : "AM";
 
   clearInterval(interval);

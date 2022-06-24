@@ -10,7 +10,7 @@ let location;
 let previousLocation;
 let lat = 0;
 let lon = 0;
-const userLocation = document.querySelector("[data-user-location]");
+export const userLocation = document.querySelector("[data-user-location]");
 const userLocationParent = userLocation.parentElement;
 const moreInfo = document.querySelector("[data-more-info]");
 
@@ -94,7 +94,6 @@ export function somethingWrong(message) {
 }
 
 function getGeolocation() {
-  userLocation.remove();
   document.body.append(loader);
   loader.style.display = "block";
 
