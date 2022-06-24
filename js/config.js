@@ -20,7 +20,7 @@ const loader = document.querySelector("[data-loader]");
 
 // Current Weather Variables
 const city = document.querySelector("[data-city]");
-const region = document.querySelector("[data-region]");
+const regionEl = document.querySelector("[data-region]");
 const currentWeatherImg = document.querySelector("[data-weather-img]");
 const currentCondition = document.querySelector("[data-condition]");
 const currentWeatherDegree = document.querySelector("[data-weather-degree]");
@@ -32,8 +32,8 @@ const forecastContainer = document.querySelector("[data-forecast-container]");
 const templateBox = document.getElementById("template-box");
 const rainBar = document.querySelector("[data-rain-bar]");
 const rainPrecentage = document.querySelector("[data-rain-precentage]");
-const sunrise = document.querySelector("[data-sunrise]");
-const sunset = document.querySelector("[data-sunset]");
+const sunriseTime = document.querySelector("[data-sunrise-time]");
+const sunsetTime = document.querySelector("[data-sunset-time]");
 
 // Clock Variables
 const hourLine = document.getElementById("hour-line");
@@ -47,7 +47,7 @@ export {
   starter,
   loader,
   city,
-  region,
+  regionEl,
   currentWeatherImg,
   currentCondition,
   currentWeatherDegree,
@@ -57,8 +57,8 @@ export {
   templateBox,
   rainBar,
   rainPrecentage,
-  sunrise,
-  sunset,
+  sunriseTime,
+  sunsetTime,
   hourLine,
   minuteLine,
   secondLine,

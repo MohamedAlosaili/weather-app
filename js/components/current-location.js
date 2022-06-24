@@ -30,7 +30,7 @@ function extractLocation(results) {
       }
     }
   }
-  if (locality !== undefined || postalCode !== undefined) {
+  if (locality !== undefined && postalCode !== undefined) {
     userLocation.remove();
     const currentLocation = `${locality} ${postalCode}`;
     localStorage.setItem("location", currentLocation);
@@ -38,6 +38,8 @@ function extractLocation(results) {
     getCurrentWeather(currentLocation);
     getForecastingWeather(currentLocation);
   } else {
-    somethingWrong("Sorry, We can't get your location now");
+    somethingWrong(
+      "Sorry, We can't get your location now,<br>You can use the search box instead"
+    );
   }
 }

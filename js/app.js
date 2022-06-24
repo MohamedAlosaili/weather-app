@@ -8,13 +8,11 @@ const searchs = document.querySelectorAll("[type='search']");
 const userLocationBtns = document.querySelectorAll("[data-my-location]");
 let location;
 let previousLocation;
-let lat = 0;
-let lon = 0;
+let lat;
+let lon;
 export const userLocation = document.querySelector("[data-user-location]");
 const userLocationParent = userLocation.parentElement;
 const moreInfo = document.querySelector("[data-more-info]");
-
-loader.style.display = "block";
 
 // Check LocalStorage
 if (localStorage.getItem("location")) {
@@ -24,7 +22,10 @@ if (localStorage.getItem("location")) {
     userLocation.remove();
   getCurrentWeather(location);
   getForecastingWeather(location);
-} else loader.remove();
+} else {
+  loader.remove();
+  starter.style.display = "block";
+}
 
 searchs.forEach((search) => {
   search.addEventListener("focus", () =>
@@ -58,7 +59,6 @@ function searchFunction(search) {
 
   if (location) {
     document.body.append(loader);
-    loader.style.display = "block";
     if (localStorage.getItem("location")) {
       previousLocation = localStorage.getItem("location");
       localStorage.setItem("location", location);
@@ -72,6 +72,9 @@ function searchFunction(search) {
 }
 
 export function somethingWrong(message) {
+  if (typeof message === "object")
+    message = message.message || "Unknown reason";
+
   loader.remove();
   if (localStorage.getItem("location"))
     localStorage.setItem("location", previousLocation);
@@ -92,15 +95,21 @@ export function somethingWrong(message) {
     .querySelector("[data-close-btn]")
     .addEventListener("click", () => wrongBox.remove());
 }
-
 function getGeolocation() {
   document.body.append(loader);
-  loader.style.display = "block";
 
-  navigator.geolocation.getCurrentPosition((position) => {
-    lat = position.coords.latitude;
-    lon = position.coords.longitude;
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition, somethingWrong);
+  } else {
+    somethingWrong(
+      "Sorry, We can't get your location, <br> This feature not supported by this browser <br> You can use the search box instead"
+    );
+  }
+}
 
-    getCurrentLocation(lat, lon);
-  });
+function showPosition(position) {
+  lat = position.coords.latitude;
+  lon = position.coords.longitude;
+
+  getCurrentLocation(lat, lon);
 }

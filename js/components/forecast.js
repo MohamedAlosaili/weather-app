@@ -9,16 +9,16 @@ import {
   templateBox,
   rainBar,
   rainPrecentage,
-  sunrise,
-  sunset,
+  sunriseTime,
+  sunsetTime,
 } from "../config.js";
 
 export async function getForecastingWeather(location) {
   try {
     const res = await fetch(API_URL + "forecast", options(location));
-    const forcastData = await res.json();
+    const forecastData = await res.json();
 
-    if (forcastData.location) fillForecastSection(forcastData);
+    if (forecastData.location) fillForecastSection(forecastData);
   } catch (err) {
     somethingWrong(err);
   }
@@ -62,33 +62,35 @@ const days = [
   "Saturday",
 ];
 
-function fillForecastSection(forcastData) {
+function fillForecastSection(forecastData) {
   if (starter || loader) {
     starter.remove();
     loader.remove();
   }
-  currentWeatherData(forcastData);
-  const date = new Date(forcastData.forecast[0].date);
+  currentWeatherData(forecastData);
+  const date = new Date(forecastData.forecast[0].date);
 
   generalDate.innerHTML = `${months[date.getMonth()]} ${date.getFullYear()}`;
   detailedDate.innerHTML = `${days[date.getDay()]}, ${
     monthsShort[date.getMonth()]
   } ${date.getDate()}, ${date.getFullYear()}`;
 
-  fillForecastBoxes(forcastData, date);
+  fillForecastBoxes(forecastData, date);
 }
 
-function currentWeatherData(forcastData) {
-  rainBar.style.width = `${forcastData.forecast[0].chance_of_rain}%`;
-  rainPrecentage.innerHTML = `${forcastData.forecast[0].chance_of_rain}%`;
-  sunrise.innerHTML = forcastData.forecast[0].sunrise;
-  sunset.innerHTML = forcastData.forecast[0].sunset;
+function currentWeatherData(forecastData) {
+  const { chance_of_rain, sunrise, sunset } = forecastData.forecast[0];
+
+  rainBar.style.width = `${chance_of_rain}%`;
+  rainPrecentage.innerHTML = `${chance_of_rain}%`;
+  sunriseTime.innerHTML = sunrise;
+  sunsetTime.innerHTML = sunset;
 }
 
-function fillForecastBoxes(forcastData, date) {
+function fillForecastBoxes(forecastData, date) {
   forecastContainer.innerHTML = "";
 
-  forcastData.forecast.forEach((day) => {
+  forecastData.forecast.forEach((day) => {
     forecastContainer.append(templateBox.content.cloneNode(true));
   });
 
@@ -96,7 +98,7 @@ function fillForecastBoxes(forcastData, date) {
 
   dayBoxes.forEach((day, idx) => {
     day.querySelector("[data-box-img]").src =
-      forcastData.forecast[idx].icon_url;
+      forecastData.forecast[idx].icon_url;
 
     if (idx <= 1) {
       if (idx === 0) day.querySelector(".day").innerHTML = "Today";
@@ -110,7 +112,7 @@ function fillForecastBoxes(forcastData, date) {
       date.getDate() + idx
     }`;
     day.querySelector(".max-min-dgree").innerHTML = `${Math.round(
-      forcastData.forecast[idx].min_temp_c
-    )}°/${Math.round(forcastData.forecast[idx].max_temp_c)}°`;
+      forecastData.forecast[idx].min_temp_c
+    )}°/${Math.round(forecastData.forecast[idx].max_temp_c)}°`;
   });
 }

@@ -4,7 +4,7 @@ import {
   starter,
   loader,
   city,
-  region,
+  regionEl,
   currentWeatherImg,
   currentCondition,
   currentWeatherDegree,
@@ -36,9 +36,11 @@ function fillCurrentWeatherSection(currentData) {
     starter.remove();
     loader.remove();
   }
-  city.innerHTML = currentData.location;
-  region.innerHTML = currentData.region;
-  currentWeatherImg.src = `https:${currentData.icon_url}`;
-  currentCondition.innerHTML = currentData.condition;
-  currentWeatherDegree.innerHTML = `${Math.round(currentData.temp_c)}° C`;
+  const { location, region, icon_url, condition, temp_c } = currentData;
+
+  city.innerHTML = location;
+  regionEl.innerHTML = region;
+  currentWeatherImg.src = `https:${icon_url}`;
+  currentCondition.innerHTML = condition;
+  currentWeatherDegree.innerHTML = `${Math.round(temp_c)}° C`;
 }
