@@ -8,7 +8,7 @@ export async function getCurrentLocation(lat, lon) {
   try {
     const res = await fetch(API_URL);
     const locationData = await res.json();
-
+    console.log(locationData);
     extractLocation(locationData.results);
   } catch (err) {
     somethingWrong(err);
