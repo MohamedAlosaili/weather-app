@@ -12,6 +12,8 @@ import {
   sunriseTime,
   sunsetTime,
 } from "../config.js";
+import { somethingWrong } from "../app.js";
+import { isDay } from "./current.js";
 
 export async function getForecastingWeather(location) {
   try {
@@ -96,21 +98,23 @@ function fillForecastBoxes(forecastData, date) {
 
   const dayBoxes = document.querySelectorAll(".day-box");
 
+  let iconCode = (idx) => forecastData.forecast[idx].icon_url.slice(-7, -4);
+  let source = isDay ? "img/weather-icons/day" : "img/weather-icons/night";
+
   dayBoxes.forEach((day, idx) => {
-    day.querySelector("[data-box-img]").src =
-      forecastData.forecast[idx].icon_url;
+    if (idx !== 0) date.setDate(date.getDate() + 1);
+
+    day.querySelector("[data-box-img]").src = `${source}/${iconCode(idx)}.svg`;
 
     if (idx <= 1) {
       if (idx === 0) day.querySelector(".day").innerHTML = "Today";
       else day.querySelector(".day").innerHTML = "Tomorrow";
-    } else {
-      const calcIdx = idx + date.getDay();
-      const dayidx = calcIdx < 7 ? calcIdx : calcIdx - 7;
-      day.querySelector(".day").innerHTML = days[dayidx];
-    }
-    day.querySelector(".date").innerHTML = `${monthsShort[date.getMonth()]}, ${
-      date.getDate() + idx
-    }`;
+    } else day.querySelector(".day").innerHTML = days[date.getDay()];
+
+    day.querySelector(".date").innerHTML = `${
+      monthsShort[date.getMonth()]
+    }, ${date.getDate()}`;
+
     day.querySelector(".max-min-dgree").innerHTML = `${Math.round(
       forecastData.forecast[idx].min_temp_c
     )}°/${Math.round(forecastData.forecast[idx].max_temp_c)}°`;

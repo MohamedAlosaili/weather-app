@@ -1,5 +1,5 @@
 // https://m3o.com
-const API_KEY = "MmJkMDUxNzYtZTNlOC00MGQ5LWIyZjEtZWEzY2NkNjYyNmQz";
+const API_KEY = "OTQ3Y2VhZWYtYmI4Ny00YTc0LWE5ZjgtMmY4NWM4MmE5OTll";
 const API_URL = "https://api.m3o.com/v1/weather/";
 const options = (location) => {
   return {

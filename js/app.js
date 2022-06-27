@@ -1,7 +1,5 @@
 import { loader, starter } from "./config.js";
 import { getCurrentWeather } from "./components/current.js";
-import { getForecastingWeather } from "./components/forecast.js";
-import { getCurrentLocation } from "./components/current-location.js";
 
 const forms = document.querySelectorAll("[data-form]");
 const searchs = document.querySelectorAll("[type='search']");
@@ -10,18 +8,18 @@ let location;
 let previousLocation;
 let lat;
 let lon;
-export const userLocation = document.querySelector("[data-user-location]");
+const userLocation = document.querySelector("[data-user-location]");
 const userLocationParent = userLocation.parentElement;
 const moreInfo = document.querySelector("[data-more-info]");
 
+const storageLocation = localStorage.getItem("location");
+const currentLocation = localStorage.getItem("current-location");
 // Check LocalStorage
-if (localStorage.getItem("location")) {
+if (storageLocation !== "null" && storageLocation !== "undefined") {
   starter.remove();
-  location = localStorage.getItem("location");
-  if (localStorage.getItem("current-location") === location)
-    userLocation.remove();
+  location = storageLocation;
+  if (currentLocation === storageLocation) userLocation.remove();
   getCurrentWeather(location);
-  getForecastingWeather(location);
 } else {
   loader.remove();
   starter.style.display = "block";
@@ -59,12 +57,11 @@ function searchFunction(search) {
 
   if (location) {
     document.body.append(loader);
-    if (localStorage.getItem("location")) {
-      previousLocation = localStorage.getItem("location");
+    if (storageLocation !== "null" && storageLocation !== "undefined") {
+      previousLocation = storageLocation;
       localStorage.setItem("location", location);
     }
     getCurrentWeather(location);
-    getForecastingWeather(location);
 
     search.value = "";
     search.blur();
@@ -76,7 +73,7 @@ export function somethingWrong(message) {
     message = message.message || "Unknown reason";
 
   loader.remove();
-  if (localStorage.getItem("location"))
+  if (storageLocation !== "null" && storageLocation !== "undefined")
     localStorage.setItem("location", previousLocation);
 
   const wrongBox = document.createElement("div");
@@ -95,6 +92,7 @@ export function somethingWrong(message) {
     .querySelector("[data-close-btn]")
     .addEventListener("click", () => wrongBox.remove());
 }
+
 function getGeolocation() {
   document.body.append(loader);
 
@@ -111,5 +109,10 @@ function showPosition(position) {
   lat = position.coords.latitude;
   lon = position.coords.longitude;
 
-  getCurrentLocation(lat, lon);
+  location = `${lat},${lon}`;
+
+  getCurrentWeather(location);
+  localStorage.setItem("location", location);
+  localStorage.setItem("current-location", location);
+  userLocation.remove();
 }
