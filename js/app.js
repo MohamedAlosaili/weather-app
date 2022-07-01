@@ -15,11 +15,18 @@ const moreInfo = document.querySelector("[data-more-info]");
 const storageLocation = localStorage.getItem("location");
 const currentLocation = localStorage.getItem("current-location");
 // Check LocalStorage
-if (storageLocation !== "null" && storageLocation !== "undefined") {
-  starter.remove();
-  location = storageLocation;
-  if (currentLocation === storageLocation) userLocation.remove();
-  getCurrentWeather(location);
+if (storageLocation) {
+  if (storageLocation !== "null" && storageLocation !== "undefined") {
+    console.log("storage is here");
+    starter.remove();
+    location = storageLocation;
+    if (currentLocation === storageLocation) userLocation.remove();
+    getCurrentWeather(location);
+  } else {
+    localStorage.removeItem("location");
+    loader.remove();
+    starter.style.display = "block";
+  }
 } else {
   loader.remove();
   starter.style.display = "block";
